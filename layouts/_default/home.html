@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="container pt-5">
+<h3 class="text-center">Welcome!!</h3>
+
+  <div class="pt-3"> {{ .Content }}</div>
+
+  <div class="container pt-5">
+    <div class="row g-3">
+  {{ range site.RegularPages }}
+    <div class="col-md-4">
+      <div class="card shadow-lg bg-body-tertiary rounded  shadow-lg bg-body-tertiary rounded" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ .LinkTitle }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            
+            {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+            {{ $dateHuman := .Date | time.Format ":date_long" }}
+            <time class="text-secondary pt-2" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+          </h6>
+          <p class="card-text text-truncate" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+            {{ .Summary | truncate 200 }}
+          </p>
+
+          <a href="{{ .RelPermalink }}" class="card-link">Read more..</a>
+        </div>
+      </div>
+    </div>
+
+  {{ end }}
+    </div>
+    </div>
+</div>
+{{ end }}
